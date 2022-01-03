@@ -9,12 +9,15 @@ export default AdminContextProvider = (props) => {
   const [users, setUsers] = useState([]);
   const [fill, setFill] = useState(0);
   const [size, setSize] = useState(0);
+  const [size2, setSize2] = useState(0);
   const [page, setPage] = useState(1);
   const [max, setMax] = useState(1);
   const [time, setTime] = useState(1);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(" ");
+  const [ref, setRef] = useState(0);
+  const [ref1, setRef1] = useState(0);
 
   const login = async () => {
     const body = new FormData();
@@ -63,7 +66,9 @@ export default AdminContextProvider = (props) => {
     });
     const result = await res.json();
     setUsers(result.users);
+    setUsersPerDate(result.users);
     setSize(result.size);
+    setSize2(result.size);
   };
 
   const logout = async () => {
@@ -105,10 +110,25 @@ export default AdminContextProvider = (props) => {
       },
       body,
     });
+    const result = await res.json();
+    setUsersPerDate(result.users);
+    setSize2(result.size);
   };
 
   const context = {
-    state: { email, password, error, users, size, fill, page, max, time },
+    state: {
+      email,
+      password,
+      error,
+      users,
+      size,
+      size2,
+      fill,
+      page,
+      max,
+      time,
+      usersPerDate,
+    },
     actions: {
       login,
       checkIfLoggedIn,
@@ -121,6 +141,7 @@ export default AdminContextProvider = (props) => {
       setPage,
       average,
       setTime,
+      setUsersPerDate,
     },
   };
 

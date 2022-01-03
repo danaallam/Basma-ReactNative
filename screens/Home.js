@@ -43,8 +43,12 @@ const Home = () => {
             <Text style={styles.filt}>20</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(20);
+                if (fill == 20) {
+                  setFill(0);
+                } else {
+                  setPage(1);
+                  setFill(20);
+                }
               }}
             >
               <Ionicons
@@ -58,8 +62,12 @@ const Home = () => {
             <Text style={styles.filt}>40</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(40);
+                if (fill == 40) {
+                  setFill(0);
+                } else {
+                  setPage(1);
+                  setFill(40);
+                }
               }}
             >
               <Ionicons
@@ -73,8 +81,12 @@ const Home = () => {
             <Text style={styles.filt}>60</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(60);
+                if (fill == 60) {
+                  setFill(0);
+                } else {
+                  setPage(1);
+                  setFill(60);
+                }
               }}
             >
               <Ionicons

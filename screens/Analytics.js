@@ -7,78 +7,126 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Button from "../components/Button";
 import Table from "../components/Table";
 import { AdminContext } from "../context/AdminContext";
 
-const Home = () => {
+const Analytics = () => {
   const {
-    state: { users, size, fill, page, max },
-    actions: { getAllUsers, filter, setFill, setPage },
+    state: { size2, time, usersPerDate },
+    actions: { getAllUsers, average, setTime },
   } = useContext(AdminContext);
 
   useEffect(async () => {
-    if (!fill) {
+    if (!time) {
       await getAllUsers();
     }
-  }, [fill]);
+  }, [time]);
 
   useEffect(async () => {
-    if (fill >= 20 && page >= 1) {
-      await filter();
+    if (time) {
+      await average();
     }
-  }, [fill, page]);
+  }, [time]);
 
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
-        <Text style={styles.title}>Registered Users:</Text>
-        <Text style={styles.sizeTitle}>
-          {size}
-          <Text style={styles.size}> users</Text>
-        </Text>
+        <View>
+          <Text style={styles.title}>Registered Users:</Text>
+          <Text style={styles.sizeTitle}>
+            {size2}
+            <Text style={styles.size}> users</Text>
+          </Text>
+        </View>
+        <Text style={styles.filterTxt}>Users per: </Text>
         <View style={styles.filter}>
-          <Text style={styles.filterTxt}>Users per page: </Text>
           <View style={styles.filterElement}>
-            <Text style={styles.filt}>20</Text>
+            <Text style={styles.filt}>24 hrs</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(20);
+                if (time == "day") {
+                  setTime(0);
+                } else {
+                  setTime("day");
+                }
               }}
             >
               <Ionicons
-                name={fill == 20 ? "radio-button-on" : "radio-button-off"}
+                name={time == "day" ? "radio-button-on" : "radio-button-off"}
                 size={20}
                 color="white"
               />
             </TouchableOpacity>
           </View>
           <View style={styles.filterElement}>
-            <Text style={styles.filt}>40</Text>
+            <Text style={styles.filt}>1 week</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(40);
+                if (time == "week") {
+                  setTime(0);
+                } else {
+                  setTime("week");
+                }
               }}
             >
               <Ionicons
-                name={fill == 40 ? "radio-button-on" : "radio-button-off"}
+                name={time == "week" ? "radio-button-on" : "radio-button-off"}
                 size={20}
                 color="white"
               />
             </TouchableOpacity>
           </View>
           <View style={styles.filterElement}>
-            <Text style={styles.filt}>60</Text>
+            <Text style={styles.filt}>1 month</Text>
             <TouchableOpacity
               onPress={() => {
-                setPage(1);
-                setFill(60);
+                if (time == "month") {
+                  setTime(0);
+                } else {
+                  setTime("month");
+                }
               }}
             >
               <Ionicons
-                name={fill == 60 ? "radio-button-on" : "radio-button-off"}
+                name={time == "month" ? "radio-button-on" : "radio-button-off"}
+                size={20}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.filterElement}>
+            <Text style={styles.filt}>3 months</Text>
+            <TouchableOpacity
+              onPress={() => {
+                if (time == "3months") {
+                  setTime(0);
+                } else {
+                  setTime("3months");
+                }
+              }}
+            >
+              <Ionicons
+                name={
+                  time == "3months" ? "radio-button-on" : "radio-button-off"
+                }
+                size={20}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.filterElement}>
+            <Text style={styles.filt}>1 year</Text>
+            <TouchableOpacity
+              onPress={() => {
+                if (time == "year") {
+                  setTime(0);
+                } else {
+                  setTime("year");
+                }
+              }}
+            >
+              <Ionicons
+                name={time == "year" ? "radio-button-on" : "radio-button-off"}
                 size={20}
                 color="white"
               />
@@ -99,44 +147,16 @@ const Home = () => {
           </View>
         </View>
         <Animated.FlatList
-          data={users}
+          data={usersPerDate}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <Table item={item} />}
-        />
-      </View>
-      <View style={styles.btn}>
-        <Button
-          enable={!fill || page == 1 ? true : false}
-          title="prev"
-          size={14}
-          padding={10}
-          onPress={() => {
-            if (page > 1) {
-              setPage((prev) => {
-                return prev - 1;
-              });
-            }
-          }}
-        />
-        <Button
-          enable={!fill || page == max ? true : false}
-          title="next"
-          size={14}
-          padding={10}
-          onPress={() => {
-            if (page < max) {
-              setPage((prev) => {
-                return prev + 1;
-              });
-            }
-          }}
         />
       </View>
     </View>
   );
 };
 
-export default Home;
+export default Analytics;
 
 const styles = StyleSheet.create({
   container: {
@@ -164,7 +184,7 @@ const styles = StyleSheet.create({
   filter: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: "5%",
+    marginBottom: "5%",
   },
   filterTxt: {
     color: "white",
@@ -172,7 +192,7 @@ const styles = StyleSheet.create({
   },
   filt: {
     color: "white",
-    fontSize: 14,
+    fontSize: 13,
   },
   filterElement: {
     flexDirection: "row",
@@ -204,12 +224,5 @@ const styles = StyleSheet.create({
   headerTxt: {
     fontSize: 17,
     fontWeight: "bold",
-  },
-  btn: {
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: "2%",
-    borderTopWidth: 1,
   },
 });
