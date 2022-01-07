@@ -12,12 +12,15 @@ export default AdminContextProvider = (props) => {
   const [size2, setSize2] = useState(0);
   const [page, setPage] = useState(1);
   const [max, setMax] = useState(1);
-  const [time, setTime] = useState(1);
+  const [time, setTime] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(" ");
-  const [ref, setRef] = useState(0);
-  const [ref1, setRef1] = useState(0);
+  const [day, setDay] = useState(0);
+  const [week, setWeek] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [month3, setMonth3] = useState(0);
+  const [year, setYear] = useState(0);
 
   const login = async () => {
     const body = new FormData();
@@ -115,6 +118,61 @@ export default AdminContextProvider = (props) => {
     setSize2(result.size);
   };
 
+  const getDay = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + `api/admin/day`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    setDay(result.size);
+  };
+
+  const getWeek = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + `api/admin/week`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    setWeek(result.size);
+  };
+
+  const getMonth = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + `api/admin/month`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    setMonth(result.size);
+  };
+
+  const get3Month = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + `api/admin/month3`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    setMonth3(result.size);
+  };
+
+  const getYear = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + `api/admin/year`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    setYear(result.size);
+  };
+
   const context = {
     state: {
       email,
@@ -128,6 +186,11 @@ export default AdminContextProvider = (props) => {
       max,
       time,
       usersPerDate,
+      day,
+      week,
+      month,
+      month3,
+      year,
     },
     actions: {
       login,
@@ -142,6 +205,11 @@ export default AdminContextProvider = (props) => {
       average,
       setTime,
       setUsersPerDate,
+      getDay,
+      getWeek,
+      getMonth,
+      get3Month,
+      getYear,
     },
   };
 

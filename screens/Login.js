@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    borderBottomWidth: 2,
-    borderRadius: 20,
-    backgroundColor: "black",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: "#ff2d47",
     paddingHorizontal: 30,
   },
   title: {
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   },
   error: {
     marginBottom: "4%",
-    color: "red",
+    color: "#ff2d47",
   },
 });

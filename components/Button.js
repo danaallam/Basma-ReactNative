@@ -13,24 +13,31 @@ const Button = ({
 }) => {
   return (
     <TouchableOpacity
-      style={{ marginBottom, marginLeft }}
+      style={[
+        styles.colorBtn,
+        {
+          marginBottom,
+          marginLeft,
+          backgroundColor: !enable ? "#ff2d47" : "gray",
+        },
+      ]}
       onPress={onPress}
       disabled={enable}
     >
-      <LinearGradient
-        colors={!enable ? ["#9f4df3", "#7b2fe4"] : ["gray"]}
+      {/* <LinearGradient
+        colors={!enable ? ["red", "#ff2d47"] : ["gray"]}
         start={{ x: 0.5, y: 0.8 }}
         style={styles.colorBtn}
+      > */}
+      <Text
+        style={[
+          styles.btnText,
+          { fontSize: size ? size : 20, padding: padding ? padding : 15 },
+        ]}
       >
-        <Text
-          style={[
-            styles.btnText,
-            { fontSize: size ? size : 20, padding: padding ? padding : 15 },
-          ]}
-        >
-          {title}
-        </Text>
-      </LinearGradient>
+        {title}
+      </Text>
+      {/* </LinearGradient> */}
     </TouchableOpacity>
   );
 };
@@ -39,7 +46,14 @@ export default Button;
 
 const styles = StyleSheet.create({
   colorBtn: {
-    borderRadius: 10,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.45,
+    shadowRadius: 4.65,
   },
   btnText: {
     fontWeight: "bold",

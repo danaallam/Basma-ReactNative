@@ -16,11 +16,11 @@ const Splash = ({ navigation }) => {
   }, []);
 
   return (
-    <Background justifyContent="flex-end" alignItems="flex-start">
-      <Text style={styles.text}>manage your business as a puzzle.</Text>
+    <Background justifyContent="flex-end" alignItems="center">
+      <Text style={styles.text}>manage your business as a puzzle</Text>
       <Button
         marginBottom={"20%"}
-        marginLeft={"5%"}
+        // marginLeft={"5%"}
         title="Get Started"
         onPress={() => navigation.navigate("Login")}
       />
@@ -32,10 +32,10 @@ export default Splash;
 
 const styles = StyleSheet.create({
   text: {
-    color: "white",
-    fontSize: 40,
+    // color: "white",
+    // fontSize: 40,
     fontWeight: "bold",
-    marginBottom: "15%",
-    marginLeft: "5%",
+    marginBottom: "5%",
+    // marginLeft: "5%",
   },
 });

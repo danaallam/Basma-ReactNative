@@ -21,10 +21,7 @@ const Home = () => {
     if (!fill) {
       await getAllUsers();
     }
-  }, [fill]);
-
-  useEffect(async () => {
-    if (fill >= 20 && page >= 1) {
+    if (fill >= 20) {
       await filter();
     }
   }, [fill, page]);
@@ -153,7 +150,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#ff2d47",
   },
   container1: {
     flex: 1,
@@ -200,6 +197,7 @@ const styles = StyleSheet.create({
     paddingVertical: "2%",
     flexDirection: "row",
     borderBottomWidth: 1,
+    borderColor: "#eee5e5"
   },
   th1Container: {
     flex: 1,
@@ -223,5 +221,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingVertical: "2%",
     borderTopWidth: 1,
+    borderColor: "#eee5e5"
   },
 });

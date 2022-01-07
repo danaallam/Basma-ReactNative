@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import { TouchableOpacity } from "react-native";
 import Analytics from "../screens/Analytics";
@@ -49,11 +49,11 @@ const TabNav = ({ navigation }) => {
         }}
       />
       <Tab.Screen
-        name="Stats"
+        name="Statistics"
         component={Analytics}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="piechart" color={color} size={size} />
+            <MaterialIcons name="history" color={color} size={size} />
           ),
         }}
       />
